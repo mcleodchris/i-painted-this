@@ -1,0 +1,8 @@
+<nav>
+  <ul>
+    <li><a routerLink="/year/all">All</a></li>
+    <li *ngFor="let year of years | async">
+      <a [routerLink]="['/year', year]">{{ year }}</a>
+    </li>
+  </ul>
+</nav>

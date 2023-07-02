@@ -1,0 +1,22 @@
+<table>
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Game</th>
+      <th>Model Count</th>
+      <th>Running Total</th>
+      <th>Completed Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let entry of entries | async">
+      <td>{{ entry.game }}</td>
+      <td>
+        <b>{{ entry.item }}</b>
+      </td>
+      <td>{{ entry.modelCount }}</td>
+      <td>{{ entry.cumulative }}</td>
+      <td>{{ entry.completedDate | date : 'mediumDate' }}</td>
+    </tr>
+  </tbody>
+</table>

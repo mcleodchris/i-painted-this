@@ -9,9 +9,10 @@ type Book @model {
 }
 """
 type Entry @model {
-  item: String!
-  game: String!
-  modelCount: Int!
-  completedDate: String!
-  createdAt: String!
+    id: ID!
+    item: String!
+    game: String!
+    modelCount: Int!
+    completedDate: DateTime!
+    createdAt: DateTime!
 }
