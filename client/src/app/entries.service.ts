@@ -12,10 +12,9 @@ export class EntriesService {
   private _entries: BehaviorSubject<Entry[]> = new BehaviorSubject<Entry[]>([]);
   private dataStore: { entries: Entry[] } = { entries: [] };
   readonly entries = this._entries.asObservable();
-
-  //entries: Entry[] = [];
   private endpoint: string = '/data-api/graphql';
   private years: Observable<number[]> = new Observable<number[]>();
+
   id: string = uuid();
 
   constructor() {}
