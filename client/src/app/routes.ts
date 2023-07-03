@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { EntryTableComponent } from './entry-table/entry-table.component';
-import { EntriesService } from './entries.service';
 
 const routeConfig: Routes = [
   {

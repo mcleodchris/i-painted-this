@@ -1,9 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 import { Entry } from '../entry';
 import { EntriesService } from '../entries.service';
-import { Observable, filter, map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-year-navigation',
@@ -12,20 +12,14 @@ import { Observable, filter, map } from 'rxjs';
   templateUrl: './year-navigation.component.html',
   styleUrls: ['./year-navigation.component.css'],
 })
-export class YearNavigationComponent {
+export class YearNavigationComponent implements OnInit {
   entriesService: EntriesService = inject(EntriesService);
   years: Observable<number[]> = new Observable<number[]>();
   route: ActivatedRoute = inject(ActivatedRoute);
   data: Observable<Entry[]> = new Observable<Entry[]>();
   entries: Entry[] = [];
-  constructor() {}
 
   ngOnInit() {
-    // this.entriesService.entries.subscribe((entries) => {
-    //   console.log(entries);
-    //   this.entries = entries;
-    // });
-
     this.data = this.entriesService.entries;
     this.entriesService.loadAll();
 

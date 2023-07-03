@@ -16,15 +16,10 @@ import { Observable } from 'rxjs';
   standalone: true,
 })
 export class AppComponent {
-  title: string = 'I Painted This';
+  title = 'I Painted This';
   entriesService: EntriesService = inject(EntriesService);
   entries: Observable<Entry[]> = new Observable<Entry[]>();
 
-  constructor() {
-    console.log(this.entriesService.id);
-  }
-  onNgInit() {
-    this.entries = this.entriesService.entries;
-    this.entriesService.loadAll();
-  }
+  constructor() {}
+  onNgInit() {}
 }

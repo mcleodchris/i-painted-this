@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Entry } from '../entry';
@@ -13,57 +13,44 @@ import { Observable, map } from 'rxjs';
   imports: [CommonModule, RouterModule, YearNavigationComponent],
   standalone: true,
 })
-export class EntryTableComponent {
-  entriesService: EntriesService = inject(EntriesService);
-  data: Observable<Entry[]> = new Observable<Entry[]>();
-  entries: Observable<Entry[]> = new Observable<Entry[]>();
-  route: ActivatedRoute = inject(ActivatedRoute);
-  cumulative: number = 0;
+export class EntryTableComponent implements OnInit {
+  private entriesService: EntriesService = inject(EntriesService);
+  private route: ActivatedRoute = inject(ActivatedRoute);
+  private data: Observable<Entry[]> = new Observable<Entry[]>();
+  entries$: Observable<Entry[]> = new Observable<Entry[]>();
 
-  constructor() {
-    // this.route.params.subscribe(async (params) => {
-    //   if (params['year'] === 'all') {
-    //     this.entriesService.getAllEntries().then((entries) => (this.entries = entries));
-    //   } else {
-    //     const year = params['year'] ? Number(params['year']) : new Date().getFullYear();
-    //     this.entriesService.getEntriesByYear(year).then((entries) => {
-    //       this.entries = entries;
-    //     });
-    //   }
-    // });
-  }
+  private addCumulative(data: Observable<Entry[]>): Observable<Entry[]> {
+    const cumulative = 0;
 
-  onNgInit() {
-    this.data = this.entriesService.entries;
-    //this.entriesService.loadAll();
-
-    this.entries = this.data.pipe(
+    return data.pipe(
       map((entries) =>
         entries.map((entry) => {
-          entry.cumulative = this.cumulative + entry.modelCount;
+          entry.cumulative = cumulative + entry.modelCount;
           return entry;
         })
       ),
       map((entries) => {
-        console.table(this.entries);
+        console.table(entries);
         return entries;
       })
     );
+  }
 
-    console.table(this.entries);
-    // this.route.params.subscribe(async (params) => {
-    //   if (params['year'] === 'all') {
-    //     //this.entriesService.getAllEntries().then((entries) => (this.entries = entries));
-    //     this.entries = this.data;
-    //   } else {
-    //     const year = params['year'] ? Number(params['year']) : new Date().getFullYear();
-    //     this.entries = this.data.pipe(
-    //       map((entries) => entries.filter((entry) => new Date(entry.completedDate).getFullYear() === year))
-    //     );
-    //     // this.entriesService.getEntriesByYear(year).then((entries) => {
-    //     //   this.entries = entries;
-    //     // });
-    //   }
-    // });
+  ngOnInit() {
+    this.data = this.entriesService.entries;
+    this.entriesService.loadAll();
+
+    this.route.params.subscribe(async (params) => {
+      if (params['year'] === 'all') {
+        this.entries$ = this.addCumulative(this.data);
+      } else {
+        const year = params['year'] ? Number(params['year']) : new Date().getFullYear();
+        this.entries$ = this.addCumulative(
+          this.data.pipe(
+            map((entries) => entries.filter((entry) => new Date(entry.completedDate).getFullYear() === year))
+          )
+        );
+      }
+    });
   }
 }

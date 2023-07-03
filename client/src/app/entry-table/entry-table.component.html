@@ -1,4 +1,4 @@
-<table>
+<table *ngIf="entries$ | async as entries; else loading">
   <thead>
     <tr>
       <th>Item</th>
@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let entry of entries | async">
+    <tr *ngFor="let entry of entries">
       <td>{{ entry.game }}</td>
       <td>
         <b>{{ entry.item }}</b>
@@ -20,3 +20,4 @@
     </tr>
   </tbody>
 </table>
+<ng-template #loading>Loading...</ng-template>

@@ -35,9 +35,7 @@ export class EntryFormComponent {
     return this.createFrom.get('completedDate');
   }
 
-  constructor() {
-    console.log(this.entriesService.id);
-  }
+  constructor() {}
 
   onSubmit() {
     const entry: Entry = {
