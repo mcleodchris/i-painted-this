@@ -1,7 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Entry } from './entry';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { v4 as uuid } from 'uuid';
+import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 
 @Injectable({
@@ -13,11 +12,6 @@ export class EntriesService {
   private dataStore: { entries: Entry[] } = { entries: [] };
   readonly entries = this._entries.asObservable();
   private endpoint = '/data-api/graphql';
-  private years: Observable<number[]> = new Observable<number[]>();
-
-  id: string = uuid();
-
-  constructor() {}
 
   loadAll() {
     this.http
@@ -43,18 +37,11 @@ export class EntriesService {
       });
   }
 
-  getYears(): Observable<number[]> {
-    if (!this._entries) {
-      console.log(`no entries loaded, loading now`);
-      this.loadAll();
-    }
+  years(): Observable<number[]> {
     return this.entries.pipe(
-      map((entries: Entry[]) =>
-        entries
-          .map((entry) => new Date(entry.completedDate).getFullYear())
-          .filter((value, index, self) => self.indexOf(value) === index)
-          .sort((a, b) => b - a)
-      )
+      map((entries) => entries.map((entry) => new Date(entry.completedDate).getFullYear())),
+      map((years) => years.filter((year, index, self) => self.indexOf(year) === index)),
+      map((years) => years.sort((a, b) => b - a))
     );
   }
 

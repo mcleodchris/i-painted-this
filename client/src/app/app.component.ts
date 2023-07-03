@@ -19,7 +19,4 @@ export class AppComponent {
   title = 'I Painted This';
   entriesService: EntriesService = inject(EntriesService);
   entries: Observable<Entry[]> = new Observable<Entry[]>();
-
-  constructor() {}
-  onNgInit() {}
 }

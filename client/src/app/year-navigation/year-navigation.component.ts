@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 import { Entry } from '../entry';
 import { EntriesService } from '../entries.service';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-year-navigation',
@@ -20,13 +20,6 @@ export class YearNavigationComponent implements OnInit {
   entries: Entry[] = [];
 
   ngOnInit() {
-    this.data = this.entriesService.entries;
-    this.entriesService.loadAll();
-
-    this.years = this.data.pipe(
-      map((entries) => entries.map((entry) => new Date(entry.completedDate).getFullYear())),
-      map((years) => years.filter((year, index, self) => self.indexOf(year) === index)),
-      map((years) => years.sort((a, b) => b - a))
-    );
+    this.years = this.entriesService.years();
   }
 }
