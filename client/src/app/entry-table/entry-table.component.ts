@@ -18,9 +18,9 @@ export class EntryTableComponent {
   data: Observable<Entry[]> = new Observable<Entry[]>();
   entries: Observable<Entry[]> = new Observable<Entry[]>();
   route: ActivatedRoute = inject(ActivatedRoute);
+  cumulative: number = 0;
 
   constructor() {
-    console.log(this.entriesService.id);
     // this.route.params.subscribe(async (params) => {
     //   if (params['year'] === 'all') {
     //     this.entriesService.getAllEntries().then((entries) => (this.entries = entries));
@@ -34,8 +34,22 @@ export class EntryTableComponent {
   }
 
   onNgInit() {
-    this.entries = this.entriesService.entries;
-    this.entriesService.loadAll();
+    this.data = this.entriesService.entries;
+    //this.entriesService.loadAll();
+
+    this.entries = this.data.pipe(
+      map((entries) =>
+        entries.map((entry) => {
+          entry.cumulative = this.cumulative + entry.modelCount;
+          return entry;
+        })
+      ),
+      map((entries) => {
+        console.table(this.entries);
+        return entries;
+      })
+    );
+
     console.table(this.entries);
     // this.route.params.subscribe(async (params) => {
     //   if (params['year'] === 'all') {

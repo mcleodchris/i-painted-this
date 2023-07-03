@@ -21,10 +21,8 @@ export class EntriesService {
 
   loadAll() {
     this.http
-      .post<Entry[]>(
-        this.endpoint,
-        {
-          query: `
+      .post<EntriesResponse>(this.endpoint, {
+        query: `
         {
             entries(orderBy: {completedDate: ASC }) {
                 items {
@@ -37,14 +35,11 @@ export class EntriesService {
                 }
             }
         }`,
-        },
-        {
-          headers: { 'Content-Type': 'application/json' },
-        }
-      )
+      })
       .subscribe((data) => {
-        this.dataStore.entries = data;
+        this.dataStore.entries = data.data.entries.items;
         this._entries.next(Object.assign({}, this.dataStore).entries);
+        console.log(this.dataStore.entries);
       });
   }
 
@@ -148,4 +143,12 @@ export class EntriesService {
   //   console.table(this.entries);
   //   return entry;
   // }
+}
+
+interface EntriesResponse {
+  data: {
+    entries: {
+      items: Entry[];
+    };
+  };
 }

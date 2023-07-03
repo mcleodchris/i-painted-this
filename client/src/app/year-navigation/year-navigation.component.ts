@@ -17,15 +17,22 @@ export class YearNavigationComponent {
   years: Observable<number[]> = new Observable<number[]>();
   route: ActivatedRoute = inject(ActivatedRoute);
   data: Observable<Entry[]> = new Observable<Entry[]>();
-  constructor() {
-    console.log(this.entriesService.id);
-  }
+  entries: Entry[] = [];
+  constructor() {}
 
   ngOnInit() {
+    // this.entriesService.entries.subscribe((entries) => {
+    //   console.log(entries);
+    //   this.entries = entries;
+    // });
+
     this.data = this.entriesService.entries;
     this.entriesService.loadAll();
+
     this.years = this.data.pipe(
-      map((entries: Entry[]) => entries.map((entry) => new Date(entry.completedDate).getFullYear()))
+      map((entries) => entries.map((entry) => new Date(entry.completedDate).getFullYear())),
+      map((years) => years.filter((year, index, self) => self.indexOf(year) === index)),
+      map((years) => years.sort((a, b) => b - a))
     );
   }
 }
