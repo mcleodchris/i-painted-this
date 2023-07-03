@@ -1,9 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Entry } from '../entry';
+import { Entry } from '../../models/entry';
 import { YearNavigationComponent } from '../year-navigation/year-navigation.component';
-import { EntriesService } from '../entries.service';
+import { EntryService } from '../../services/entry.service';
 import { Observable, map } from 'rxjs';
 
 @Component({
@@ -14,7 +14,7 @@ import { Observable, map } from 'rxjs';
   standalone: true,
 })
 export class EntryTableComponent implements OnInit {
-  private entriesService: EntriesService = inject(EntriesService);
+  private entriesService: EntryService = inject(EntryService);
   private route: ActivatedRoute = inject(ActivatedRoute);
   private data: Observable<Entry[]> = new Observable<Entry[]>();
   entries$: Observable<Entry[]> = new Observable<Entry[]>();

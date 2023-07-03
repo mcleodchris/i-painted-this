@@ -1,8 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, ActivatedRoute } from '@angular/router';
-import { Entry } from '../entry';
-import { EntriesService } from '../entries.service';
+import { Entry } from '../../models/entry';
+import { EntryService } from '../../services/entry.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./year-navigation.component.css'],
 })
 export class YearNavigationComponent implements OnInit {
-  entriesService: EntriesService = inject(EntriesService);
+  entriesService: EntryService = inject(EntryService);
   years: Observable<number[]> = new Observable<number[]>();
   route: ActivatedRoute = inject(ActivatedRoute);
   data: Observable<Entry[]> = new Observable<Entry[]>();

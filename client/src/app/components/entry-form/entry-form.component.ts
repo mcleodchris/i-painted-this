@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Entry } from '../entry';
+import { Entry } from '../../models/entry';
 import { v4 as uuid } from 'uuid';
-import { EntriesService } from '../entries.service';
+import { EntryService } from '../../services/entry.service';
 
 @Component({
   selector: 'app-entry-form',
@@ -13,7 +13,7 @@ import { EntriesService } from '../entries.service';
   styleUrls: ['./entry-form.component.css'],
 })
 export class EntryFormComponent {
-  entriesService: EntriesService = inject(EntriesService);
+  entriesService: EntryService = inject(EntryService);
 
   createFrom = new FormGroup({
     item: new FormControl('', Validators.required),
@@ -44,7 +44,6 @@ export class EntryFormComponent {
       createdAt: new Date().toISOString(),
       id: uuid(),
     };
-    console.log(entry);
-    //this.entriesService.createEntry(entry);
+    this.entriesService.create(entry);
   }
 }

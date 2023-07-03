@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { EntryTableComponent } from './entry-table/entry-table.component';
-import { YearNavigationComponent } from './year-navigation/year-navigation.component';
-import { EntryFormComponent } from './entry-form/entry-form.component';
-import { EntriesService } from './entries.service';
-import { Entry } from './entry';
+import { EntryTableComponent } from '../entry-table/entry-table.component';
+import { YearNavigationComponent } from '../year-navigation/year-navigation.component';
+import { EntryFormComponent } from '../entry-form/entry-form.component';
+import { EntryService } from '../../services/entry.service';
+import { Entry } from '../../models/entry';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -17,6 +17,6 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
   title = 'I Painted This';
-  entriesService: EntriesService = inject(EntriesService);
+  entriesService: EntryService = inject(EntryService);
   entries: Observable<Entry[]> = new Observable<Entry[]>();
 }
