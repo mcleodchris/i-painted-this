@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Entry } from '../../models/entry';
+import { Entry } from '../../models';
 import { v4 as uuid } from 'uuid';
 import { EntryService } from '../../services/entry.service';
 

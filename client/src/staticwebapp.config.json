@@ -2,5 +2,15 @@
   "navigationFallback": {
     "rewrite": "index.html",
     "exclude": ["*.{png,jpg,gif}", "*.css", "favicon.ico"]
-  }
+  },
+  "routes": [
+    {
+      "route": "/.auth/login/github",
+      "statusCode": 404
+    },
+    {
+      "route": "/.auth/login/twitter",
+      "statusCode": 404
+    }
+  ]
 }

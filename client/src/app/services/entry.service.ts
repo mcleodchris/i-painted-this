@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Entry } from '../models/entry';
+import { Entry, EntriesResponse } from '../models/';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 
@@ -52,12 +52,4 @@ export class EntryService {
     console.table(this.entries);
     return entry;
   }
-}
-
-interface EntriesResponse {
-  data: {
-    entries: {
-      items: Entry[];
-    };
-  };
 }

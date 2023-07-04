@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, ActivatedRoute } from '@angular/router';
-import { Entry } from '../../models/entry';
+import { Entry } from '../../models';
 import { EntryService } from '../../services/entry.service';
 import { Observable } from 'rxjs';
 
