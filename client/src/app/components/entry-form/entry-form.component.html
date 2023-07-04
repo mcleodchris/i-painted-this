@@ -1,9 +1,6 @@
-<form [formGroup]="createFrom" (submit)="onSubmit()">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
   <label for="form-game">Game/Brand</label>
   <input id="form-game" type="text" formControlName="game" required />
-  <div *ngIf="game?.invalid && (game?.dirty || game?.touched)" class="alert alert-danger">
-    <div *ngIf="game?.errors?.['required']">Game is required.</div>
-  </div>
 
   <label for="form-item">What did you paint?</label>
   <input id="form-item" type="text" formControlName="item" required />
@@ -14,5 +11,5 @@
   <label for="form-completionDate">Date of Completion</label>
   <input id="form-completionDate" type="date" formControlName="completedDate" required />
   <button type="submit" class="primary">Add</button>
-  <button type="cancel" class="">Cancel</button>
+  <button type="reset" class="">Cancel</button>
 </form>

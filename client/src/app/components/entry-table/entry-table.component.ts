@@ -28,11 +28,7 @@ export class EntryTableComponent implements OnInit {
           entry.cumulative = cumulative + entry.modelCount;
           return entry;
         })
-      ),
-      map((entries) => {
-        console.table(entries);
-        return entries;
-      })
+      )
     );
   }
 

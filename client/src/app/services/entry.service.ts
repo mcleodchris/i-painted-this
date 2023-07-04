@@ -33,7 +33,6 @@ export class EntryService {
       .subscribe((data) => {
         this.dataStore.entries = data.data.entries.items;
         this._entries.next(Object.assign({}, this.dataStore).entries);
-        console.log(this.dataStore.entries);
       });
   }
 
@@ -46,10 +45,53 @@ export class EntryService {
   }
 
   create(entry: Entry) {
-    console.log(entry);
-    this.dataStore.entries.push(entry);
-    this._entries.next(Object.assign({}, this.dataStore).entries);
-    console.table(this.entries);
-    return entry;
+    this.http
+      .post<{ data: { createEntry: Entry } }>(this.endpoint, {
+        query: `
+        mutation {
+            createEntry(item: {
+                id: "${entry.id}"
+                item: "${entry.item}"
+                game: "${entry.game}"
+                modelCount: ${entry.modelCount}
+                completedDate: "${entry.completedDate}"
+                createdAt: "${entry.createdAt}"
+              }) {
+                id
+                item
+                game
+                modelCount
+                completedDate
+                createdAt
+            }
+        }`,
+      })
+      .subscribe((data) => {
+        this.dataStore.entries.push(data.data.createEntry);
+        this._entries.next(Object.assign({}, this.dataStore).entries);
+      });
+  }
+
+  delete(id: string) {
+    this.http
+      .post<{ data: { deleteEntry: Entry } }>(this.endpoint, {
+        query: `
+        mutation {
+            deleteEntry(item: {
+                id: "${id}"
+              }) {
+                id
+            }
+        }`,
+      })
+      .subscribe((data) => {
+        console.log(data);
+        this.dataStore.entries.forEach((entry, index) => {
+          if (entry.id === id) {
+            this.dataStore.entries.splice(index, 1);
+          }
+        });
+        this._entries.next(Object.assign({}, this.dataStore).entries);
+      });
   }
 }
