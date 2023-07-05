@@ -1,0 +1,27 @@
+.mat-column-item {
+  font-weight: 600;
+  font-size: 1.2em;
+}
+.mat-column-modelCount,
+.mat-column-cumulative {
+  text-align: center;
+}
+.mat-column-cumulative.mat-mdc-cell span {
+  padding: 2px 5px;
+  border-radius: 5px;
+  background-color: rgb(220 252 231/1);
+  color: rgb(22 101 52/1);
+}
+.mat-mdc-header-row {
+  background-color: rgb(249 250 251/1);
+}
+.mat-mdc-header-cell {
+  text-transform: uppercase;
+  font-size: 1em;
+  font-weight: normal;
+  letter-spacing: 0.2em;
+  color: rgb(75 85 99/1);
+}
+.mat-mdc-header-cell small {
+  display: block;
+}

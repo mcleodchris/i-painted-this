@@ -1,6 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
 import { Entry } from '../../models';
 import { v4 as uuid } from 'uuid';
 import { EntryService } from '../../services/entry.service';
@@ -8,10 +13,18 @@ import { EntryService } from '../../services/entry.service';
 @Component({
   selector: 'app-entry-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatButtonModule,
+  ],
   templateUrl: './entry-form.component.html',
   styleUrls: ['./entry-form.component.css'],
-  providers: [FormBuilder],
+  providers: [FormBuilder, { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }],
 })
 export class EntryFormComponent {
   entriesService: EntryService = inject(EntryService);
@@ -20,15 +33,8 @@ export class EntryFormComponent {
   form = this.formBuilder.nonNullable.group({
     item: ['', Validators.required],
     game: ['', Validators.required],
-    modelCount: [0, Validators.required],
-    completedDate: ['', Validators.required],
-  });
-
-  createFrom = new FormGroup({
-    item: new FormControl('', Validators.required),
-    game: new FormControl('', Validators.required),
-    modelCount: new FormControl('', Validators.required),
-    completedDate: new FormControl('', Validators.required),
+    modelCount: [1, [Validators.required, Validators.min(1)]],
+    completedDate: [new Date(), Validators.required],
   });
 
   get item() {
@@ -50,11 +56,11 @@ export class EntryFormComponent {
       item: String(this.form.value.item),
       game: String(this.form.value.game),
       modelCount: Number(this.form.value.modelCount),
-      completedDate: `${this.form.value.completedDate}T00:00:00.000Z`,
+      completedDate: this.form.value.completedDate?.toISOString() ?? new Date().toISOString(),
       createdAt: new Date().toISOString(),
       id: uuid(),
     };
-    this.entriesService.create(entry);
+    //this.entriesService.create(entry);
     this.form.reset();
   }
 }

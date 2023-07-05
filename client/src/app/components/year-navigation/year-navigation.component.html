@@ -1,8 +1,9 @@
 <nav>
+  <span>Filter by Year:</span>
   <ul>
-    <li><a routerLink="/year/all">All</a></li>
+    <li><a mat-fab extended color="accent" routerLink="/year/all">All</a></li>
     <li *ngFor="let year of years | async">
-      <a [routerLink]="['/year', year]">{{ year }}</a>
+      <a mat-fab extended color="accent" [routerLink]="['/year', year]">{{ year }}</a>
     </li>
   </ul>
 </nav>

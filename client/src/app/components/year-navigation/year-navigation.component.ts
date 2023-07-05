@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, ActivatedRoute } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
 import { Entry } from '../../models';
 import { EntryService } from '../../services/entry.service';
 import { Observable } from 'rxjs';
@@ -8,7 +9,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-year-navigation',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, MatButtonModule],
   templateUrl: './year-navigation.component.html',
   styleUrls: ['./year-navigation.component.css'],
 })

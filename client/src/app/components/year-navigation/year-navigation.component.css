@@ -1,0 +1,21 @@
+ul,
+li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+}
+li a {
+  margin: 0 1rem;
+}
+nav {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+}
