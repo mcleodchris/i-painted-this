@@ -1,6 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { EntryTableComponent } from '../entry-table/entry-table.component';
 import { YearNavigationComponent } from '../year-navigation/year-navigation.component';
 import { EntryFormComponent } from '../entry-form/entry-form.component';
@@ -13,7 +16,17 @@ import { UserInfo } from 'src/app/models';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  imports: [EntryTableComponent, RouterModule, CommonModule, YearNavigationComponent, EntryFormComponent, NavComponent],
+  imports: [
+    EntryTableComponent,
+    RouterModule,
+    CommonModule,
+    YearNavigationComponent,
+    EntryFormComponent,
+    NavComponent,
+    MatIconModule,
+    MatButtonModule,
+    MatToolbarModule,
+  ],
   standalone: true,
 })
 export class AppComponent implements OnInit {

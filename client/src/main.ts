@@ -5,7 +5,8 @@ import { provideHttpClient } from '@angular/common/http';
 import { AppComponent } from './app/components/app/app.component';
 import { EntryService } from './app/services/entry.service';
 import { UserService } from './app/services/user.service';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 bootstrapApplication(AppComponent, {
-  providers: [provideRouter(routeConfig), provideHttpClient(), EntryService, UserService],
+  providers: [provideRouter(routeConfig), provideHttpClient(), EntryService, UserService, provideAnimations()],
 });

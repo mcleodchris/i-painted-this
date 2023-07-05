@@ -1,6 +1,8 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <label for="form-game">Game/Brand</label>
-  <input id="form-game" type="text" formControlName="game" required />
+  <mat-form-field appearance="outline">
+    <mat-label>Game/Brand</mat-label>
+    <input matInput placeholder="Placeholder" formControlName="game" required />
+  </mat-form-field>
 
   <label for="form-item">What did you paint?</label>
   <input id="form-item" type="text" formControlName="item" required />

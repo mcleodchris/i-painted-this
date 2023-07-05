@@ -1,8 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { MatTableModule } from '@angular/material/table';
 import { Entry } from '../../models';
 import { YearNavigationComponent } from '../year-navigation/year-navigation.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { EntryService } from '../../services/entry.service';
 import { Observable, map } from 'rxjs';
 
@@ -10,7 +12,7 @@ import { Observable, map } from 'rxjs';
   selector: 'app-entry-table',
   templateUrl: './entry-table.component.html',
   styleUrls: ['./entry-table.component.css'],
-  imports: [CommonModule, RouterModule, YearNavigationComponent],
+  imports: [CommonModule, RouterModule, YearNavigationComponent, MatTableModule, MatProgressSpinnerModule],
   standalone: true,
 })
 export class EntryTableComponent implements OnInit {
@@ -18,6 +20,7 @@ export class EntryTableComponent implements OnInit {
   private route: ActivatedRoute = inject(ActivatedRoute);
   private data: Observable<Entry[]> = new Observable<Entry[]>();
   entries$: Observable<Entry[]> = new Observable<Entry[]>();
+  displayedColumns: string[] = ['game', 'item', 'modelCount', 'cumulative', 'completedDate'];
 
   private addCumulative(data: Observable<Entry[]>): Observable<Entry[]> {
     const cumulative = 0;

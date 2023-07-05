@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { Entry } from '../../models';
 import { v4 as uuid } from 'uuid';
 import { EntryService } from '../../services/entry.service';
@@ -8,7 +10,7 @@ import { EntryService } from '../../services/entry.service';
 @Component({
   selector: 'app-entry-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, MatInputModule, MatFormFieldModule],
   templateUrl: './entry-form.component.html',
   styleUrls: ['./entry-form.component.css'],
   providers: [FormBuilder],
