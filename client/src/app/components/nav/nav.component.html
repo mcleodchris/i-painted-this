@@ -1,18 +1,28 @@
-<nav class="menu auth">
-  <p class="menu-label">Auth</p>
-  <div class="menu-list auth">
-    <ng-container *ngIf="userInfo$ | async as userInfo; else login">
-      <a href="/.auth/logout?post_logout_redirect_uri={{ redirect }}">Logout</a>
+<mat-toolbar>Menu</mat-toolbar>
+<mat-card class="user-card" *ngIf="userInfo$ | async as userInfo" [appearance]="'outlined'">
+  <mat-card-header>
+    <div mat-card-avatar class="avatar-image"></div>
+    <mat-card-title>{{ userInfo.userDetails }}</mat-card-title>
+    <mat-card-subtitle>Welcome Back</mat-card-subtitle>
+  </mat-card-header>
+</mat-card>
+<mat-nav-list>
+  <ng-container *ngIf="userInfo$ | async as userInfo; else login">
+    <a mat-list-item href="/.auth/logout?post_logout_redirect_uri={{ redirect }}">
+      <span class="icon-align">
+        <span>Logout</span>
+        <mat-icon matListIcon>logout</mat-icon>
+      </span>
+    </a>
+  </ng-container>
+  <ng-template #login>
+    <ng-container *ngFor="let provider of providers">
+      <a href="/.auth/login/{{ provider }}?post_login_redirect_uri={{ redirect }}">
+        <span class="icon-align">
+          <span>Login</span>
+          <mat-icon matListIcon>login</mat-icon>
+        </span>
+      </a>
     </ng-container>
-    <ng-template #login>
-      <ng-container *ngFor="let provider of providers">
-        <a href="/.auth/login/{{ provider }}?post_login_redirect_uri={{ redirect }}">Login with {{ provider }}</a>
-      </ng-container>
-    </ng-template>
-  </div>
-  <div class="user" *ngIf="userInfo$ | async as userInfo">
-    <p>Welcome</p>
-    <p>{{ userInfo.userDetails }}</p>
-    <p>{{ userInfo.identityProvider }}</p>
-  </div>
-</nav>
+  </ng-template>
+</mat-nav-list>

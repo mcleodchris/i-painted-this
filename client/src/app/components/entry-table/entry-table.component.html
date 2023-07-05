@@ -4,9 +4,9 @@
     <td mat-cell *matCellDef="let entry">{{ entry.game }}</td>
   </ng-container>
   <ng-container matColumnDef="item">
-    <th mat-header-cell *matHeaderCellDef>Item(s)</th>
+    <th mat-header-cell *matHeaderCellDef>What did you paint? <small>e.g. Steampunk Lemmings</small></th>
     <td mat-cell *matCellDef="let entry">
-      <b>{{ entry.item }}</b>
+      {{ entry.item }}
     </td>
   </ng-container>
   <ng-container matColumnDef="modelCount">
@@ -15,7 +15,9 @@
   </ng-container>
   <ng-container matColumnDef="cumulative">
     <th mat-header-cell *matHeaderCellDef>Running Total</th>
-    <td mat-cell *matCellDef="let entry">{{ entry.cumulative }}</td>
+    <td mat-cell *matCellDef="let entry">
+      <span>{{ entry.cumulative }}</span>
+    </td>
   </ng-container>
   <ng-container matColumnDef="completedDate">
     <th mat-header-cell *matHeaderCellDef>Completed Date</th>

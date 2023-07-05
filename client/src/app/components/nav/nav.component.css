@@ -1,0 +1,9 @@
+.avatar-image {
+  background-image: url('/assets/AzAD_pic24.png');
+  background-size: cover;
+}
+.icon-align {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

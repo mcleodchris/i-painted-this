@@ -23,15 +23,16 @@ export class EntryTableComponent implements OnInit {
   displayedColumns: string[] = ['game', 'item', 'modelCount', 'cumulative', 'completedDate'];
 
   private addCumulative(data: Observable<Entry[]>): Observable<Entry[]> {
-    const cumulative = 0;
-
     return data.pipe(
-      map((entries) =>
+      map((entries) => {
+        let cumulative = 0;
         entries.map((entry) => {
           entry.cumulative = cumulative + entry.modelCount;
+          cumulative = entry.cumulative;
           return entry;
-        })
-      )
+        });
+        return entries;
+      })
     );
   }
 

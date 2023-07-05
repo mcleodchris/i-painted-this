@@ -1,17 +1,23 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <mat-form-field appearance="outline">
     <mat-label>Game/Brand</mat-label>
-    <input matInput placeholder="Placeholder" formControlName="game" required />
+    <input matInput placeholder="e.g. Infinity/Age of Sigmar" formControlName="game" required />
   </mat-form-field>
-
-  <label for="form-item">What did you paint?</label>
-  <input id="form-item" type="text" formControlName="item" required />
-
-  <label for="form-modelCount">Number of models</label>
-  <input id="form-modelCount" type="number" formControlName="modelCount" required />
-
-  <label for="form-completionDate">Date of Completion</label>
-  <input id="form-completionDate" type="date" formControlName="completedDate" required />
-  <button type="submit" class="primary">Add</button>
-  <button type="reset" class="">Cancel</button>
+  <mat-form-field appearance="outline">
+    <mat-label>What did you paint?</mat-label>
+    <input matInput placeholder="e.g. Steampunk Lemmings" formControlName="item" required />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>How many did you paint?</mat-label>
+    <input type="number" matInput placeholder="e.g. 10" formControlName="modelCount" required />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Completion Date?</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="completedDate" required />
+    <mat-hint>DD/MM/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <button mat-flat-button color="primary" type="submit" [disabled]="!form.valid">Add</button>
+  <button type="reset" mat-flat-button>Cancel</button>
 </form>
