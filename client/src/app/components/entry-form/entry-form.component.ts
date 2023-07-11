@@ -1,6 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormBuilder,
+  ReactiveFormsModule,
+  Validators,
+  FormGroupDirective,
+} from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -50,8 +57,7 @@ export class EntryFormComponent {
     return this.form.get('completedDate');
   }
 
-  onSubmit() {
-    console.log(this.form.value);
+  onSubmit(formData: any, formDirective: FormGroupDirective): void {
     const entry: Entry = {
       item: String(this.form.value.item),
       game: String(this.form.value.game),
@@ -60,7 +66,8 @@ export class EntryFormComponent {
       createdAt: new Date().toISOString(),
       id: uuid(),
     };
-    //this.entriesService.create(entry);
+    this.entriesService.create(entry);
+    formDirective.resetForm();
     this.form.reset();
   }
 }

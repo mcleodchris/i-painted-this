@@ -1,19 +1,19 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<form [formGroup]="form" (ngSubmit)="onSubmit(form, formDirective)" #formDirective="ngForm">
   <mat-form-field appearance="outline">
     <mat-label>Game/Brand</mat-label>
-    <input matInput placeholder="e.g. Infinity/Age of Sigmar" formControlName="game" required />
+    <input matInput placeholder="e.g. Infinity/Age of Sigmar" formControlName="game" />
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>What did you paint?</mat-label>
-    <input matInput placeholder="e.g. Steampunk Lemmings" formControlName="item" required />
+    <input matInput placeholder="e.g. Steampunk Lemmings" formControlName="item" />
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>How many did you paint?</mat-label>
-    <input type="number" matInput placeholder="e.g. 10" formControlName="modelCount" required />
+    <input type="number" matInput placeholder="e.g. 10" formControlName="modelCount" />
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Completion Date?</mat-label>
-    <input matInput [matDatepicker]="picker" formControlName="completedDate" required />
+    <input matInput [matDatepicker]="picker" formControlName="completedDate" />
     <mat-hint>DD/MM/YYYY</mat-hint>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
