@@ -48,15 +48,8 @@ export class EntryService {
     this.http
       .post<{ data: { createEntry: Entry } }>(this.endpoint, {
         query: `
-        mutation {
-            createEntry(item: {
-                id: "${entry.id}"
-                item: "${entry.item}"
-                game: "${entry.game}"
-                modelCount: ${entry.modelCount}
-                completedDate: "${entry.completedDate}"
-                createdAt: "${entry.createdAt}"
-              }) {
+        mutation create($item: CreateEntryInput!){
+            createEntry(item: $item) {
                 id
                 item
                 game
@@ -65,6 +58,9 @@ export class EntryService {
                 createdAt
             }
         }`,
+        variables: {
+          item: entry,
+        },
       })
       .subscribe((data) => {
         this.dataStore.entries.push(data.data.createEntry);
