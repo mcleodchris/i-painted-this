@@ -76,13 +76,15 @@ export class EntryService {
     this.http
       .post<{ data: { deleteEntry: Entry } }>(this.endpoint, {
         query: `
-        mutation {
-            deleteEntry(item: {
-                id: "${id}"
-              }) {
+        mutation delete($id: ID!, $_partitionKeyValue: String!) {
+            deleteEntry(id: $id, _partitionKeyValue: $_partitionKeyValue) {
                 id
             }
         }`,
+        variables: {
+          id: id,
+          _partitionKeyValue: id,
+        },
       })
       .subscribe((data) => {
         console.log(data);
