@@ -4,11 +4,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { Entry } from 'src/app/models';
 import { EntryService } from 'src/app/services/entry.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-delete-button',
   standalone: true,
-  imports: [MatDialogModule, ConfirmationDialogComponent, MatButtonModule],
+  imports: [MatDialogModule, ConfirmationDialogComponent, MatButtonModule, MatIconModule],
   templateUrl: './delete-button.component.html',
   styleUrls: ['./delete-button.component.css'],
 })

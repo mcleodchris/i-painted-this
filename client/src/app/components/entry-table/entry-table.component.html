@@ -23,9 +23,11 @@
     <th mat-header-cell *matHeaderCellDef>Completed Date</th>
     <td mat-cell *matCellDef="let entry">{{ entry.completedDate | date : 'mediumDate' }}</td>
   </ng-container>
-  <ng-container matColumnDef="controls" *ngIf="userInfo$ | async">
+  <ng-container matColumnDef="controls">
     <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
-    <td mat-cell *matCellDef="let entry"><app-delete-button [entry]="entry"></app-delete-button></td>
+    <td mat-cell *matCellDef="let entry">
+      <app-delete-button *ngIf="userInfo$ | async" [entry]="entry"></app-delete-button>
+    </td>
   </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>

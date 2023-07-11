@@ -1,0 +1,32 @@
+.form-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 0 1rem 0;
+  width: 100%;
+}
+.form-row mat-form-field {
+  width: 100%;
+}
+.form-row mat-form-field.date-picker {
+  width: 40%;
+}
+.form-row mat-form-field.number {
+  width: 30%;
+}
+.form-row mat-form-field + mat-form-field {
+  margin-left: 1rem;
+}
+.form-controls {
+  display: flex;
+  justify-content: flex-end;
+  margin: 1rem 0 2rem;
+  width: 100%;
+}
+.form-controls button {
+  margin-left: 0.5rem;
+}
+form {
+  width: 100%;
+  margin-bottom: 24px;
+}
