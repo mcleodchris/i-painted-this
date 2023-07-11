@@ -1,23 +1,27 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit(form, formDirective)" #formDirective="ngForm">
-  <mat-form-field appearance="outline">
-    <mat-label>Game/Brand</mat-label>
-    <input matInput placeholder="e.g. Infinity/Age of Sigmar" formControlName="game" />
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>What did you paint?</mat-label>
-    <input matInput placeholder="e.g. Steampunk Lemmings" formControlName="item" />
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>How many did you paint?</mat-label>
-    <input type="number" matInput placeholder="e.g. 10" formControlName="modelCount" />
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>Completion Date?</mat-label>
-    <input matInput [matDatepicker]="picker" formControlName="completedDate" />
-    <mat-hint>DD/MM/YYYY</mat-hint>
-    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-  <button mat-flat-button color="primary" type="submit" [disabled]="!form.valid">Add</button>
-  <button type="reset" mat-flat-button>Cancel</button>
+  <div class="form-row">
+    <mat-form-field appearance="outline">
+      <mat-label>Game/Brand</mat-label>
+      <input matInput class="text-field" placeholder="e.g. Infinity/Age of Sigmar" formControlName="game" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>What did you paint?</mat-label>
+      <input matInput class="text-field" placeholder="e.g. Steampunk Lemmings" formControlName="item" />
+    </mat-form-field>
+    <mat-form-field class="number" appearance="outline">
+      <mat-label>How many?</mat-label>
+      <input type="number" matInput placeholder="e.g. 10" formControlName="modelCount" />
+    </mat-form-field>
+    <mat-form-field class="date-picker" appearance="outline">
+      <mat-label>Completion Date?</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="completedDate" />
+      <mat-hint>DD/MM/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div class="form-controls">
+    <button mat-flat-button color="primary" type="submit" [disabled]="!form.valid">Add</button>
+    <button type="reset" mat-flat-button>Cancel</button>
+  </div>
 </form>

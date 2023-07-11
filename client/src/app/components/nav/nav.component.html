@@ -2,7 +2,7 @@
 <mat-card class="user-card" *ngIf="userInfo$ | async as userInfo" [appearance]="'outlined'">
   <mat-card-header>
     <div mat-card-avatar class="avatar-image"></div>
-    <mat-card-title>{{ userInfo.userDetails }}</mat-card-title>
+    <mat-card-title>{{ userInfo.userDetails.split('@')[0] | titlecase }}</mat-card-title>
     <mat-card-subtitle>Welcome Back</mat-card-subtitle>
   </mat-card-header>
 </mat-card>
@@ -17,7 +17,7 @@
   </ng-container>
   <ng-template #login>
     <ng-container *ngFor="let provider of providers">
-      <a href="/.auth/login/{{ provider }}?post_login_redirect_uri={{ redirect }}">
+      <a mat-list-item href="/.auth/login/{{ provider }}?post_login_redirect_uri={{ redirect }}">
         <span class="icon-align">
           <span>Login</span>
           <mat-icon matListIcon>login</mat-icon>
