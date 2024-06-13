@@ -12,7 +12,7 @@ type Entry @model {
     id: ID!
     item: String!
     game: String!
-    modelCount: Number!
+    modelCount: Int!
     completedDate: DateTime!
     createdAt: DateTime!
 }
