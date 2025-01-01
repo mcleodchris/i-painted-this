@@ -18,7 +18,7 @@ export class EntryService {
       .post<EntriesResponse>(this.endpoint, {
         query: `
         {
-            entries(orderBy: {completedDate: ASC }) {
+            entries(first: 150, orderBy: {completedDate: ASC }) {
                 items {
                     id
                     item
